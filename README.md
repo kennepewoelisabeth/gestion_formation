@@ -17,3 +17,7 @@ gestion-formations/
 ├── gestion_etudiant.py
 
 ├── main.py
+
+
+## 📸 Aperçu de l'application
+![Aperçu](images/vue.png)
