@@ -318,7 +318,27 @@ class GestionEtudiants:
                     self.rafraichir_etudiant()
                     self.afficherTousBouton()
     def supprimer_etudiant(self):
-        pass
+        if ineEtudiantText.get() != "":
+            supp = messagebox.askyesno("supprimer", "voulez vous vraiment supprimer cet etudiant")
+            if supp<=0:
+                self.afficherTousBouton()
+            else:
+                bdd = "bdd/bdd_gestion_formations.db"
+                connexion = sqlite3.connect(bdd)
+                cursor = connexion.cursor()
+
+                data = (ineEtudiantText.get(),)
+                req = "DELETE FROM etudiants WHERE ine_etudiant = ?"
+                cursor.execute(req, data)
+                connexion.commit()
+
+                cursor.close()
+                connexion.close()
+
+                messagebox.showinfo("confirmation de suppression", "l'etudiant a bien été supprimé")
+                self.rafraichir_etudiant()
+                self.afficherTousBouton()
+
 
     def rafraichir_etudiant(self):
         ineEtudiantText['state']= 'normal'
